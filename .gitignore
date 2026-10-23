@@ -1,0 +1,50 @@
+# Archivos compilados
+*.class
+*.jar
+
+# Carpetas de compilacion
+bin/
+build/
+out/
+target/
+dist/
+
+# Temporales
+*.log
+*.tmp
+*.temp
+*_tmp/
+**/_tmp/
+hs_err_pid*
+replay_pid*
+
+# Configuracion local
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+*.swp
+*~
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# PDF y auxiliares de documentacion local
+*.pdf
+*.aux
+*.toc
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+_minted*/
+
+# Empaquetados
+*.zip
+
+# Entrega local (PDF / LaTeX), no publicada en este repositorio
+entrega/

@@ -1,0 +1,74 @@
+@startuml diagrama_clases
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+left to right direction
+
+package Notas {
+
+  class Principal {
+    + {static} main(args: String[]): void
+  }
+
+  class VentanaPrincipal {
+    - contenedor: Container
+    - nota1: JLabel
+    - nota2: JLabel
+    - nota3: JLabel
+    - nota4: JLabel
+    - nota5: JLabel
+    - promedio: JLabel
+    - desviacion: JLabel
+    - mayor: JLabel
+    - menor: JLabel
+    - campoNota1: JTextField
+    - campoNota2: JTextField
+    - campoNota3: JTextField
+    - campoNota4: JTextField
+    - campoNota5: JTextField
+    - calcular: JButton
+    - limpiar: JButton
+    + VentanaPrincipal()
+    - inicio(): void
+    + actionPerformed(evento: ActionEvent): void
+    - calcularNotas(): void
+    - limpiarCampos(): void
+    - restablecerResultados(): void
+  }
+
+  class Notas {
+    ~ listaNotas: double[5]
+    + Notas()
+    ~ calcularPromedio(): double
+    ~ calcularDesviacion(): double
+    ~ calcularMayor(): double
+    ~ calcularMenor(): double
+  }
+
+  interface ActionListener <<interface>> {
+    + actionPerformed(e: ActionEvent): void
+  }
+
+  class JFrame
+}
+
+Principal --> VentanaPrincipal : crea
+VentanaPrincipal --|> JFrame
+VentanaPrincipal ..|> ActionListener
+VentanaPrincipal --> Notas : usa\n(al calcular)
+
+note right of Notas
+  Correccion p. 485:
+  calcularPromedio recorre
+  desde el indice 0.
+  Desviacion poblacional: / n
+end note
+
+note bottom of VentanaPrincipal
+  Ejercicios propuestos p. 494:
+  JOptionPane si falta una nota
+  o si el dato no es numerico.
+  Limpiar tambien restablece
+  las etiquetas de resultado.
+end note
+
+@enduml

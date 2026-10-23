@@ -1,0 +1,38 @@
+@startuml casos_uso
+left to right direction
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam packageStyle rectangle
+
+actor Usuario as usuario
+
+rectangle "Aplicacion Figuras (ejercicio 8.3)" {
+  usecase "Seleccionar figura geometrica" as UC1
+  usecase "Ingresar dimensiones" as UC2
+  usecase "Calcular volumen y superficie" as UC3
+  usecase "Consultar resultados" as UC4
+  usecase "Gestionar entradas invalidas" as UC5
+
+  usecase "Calcular cilindro" as UC6
+  usecase "Calcular esfera" as UC7
+  usecase "Calcular piramide" as UC8
+  usecase "Calcular cubo" as UC9
+  usecase "Calcular prisma" as UC10
+}
+
+usuario --> UC1
+usuario --> UC2
+usuario --> UC3
+
+' Modalidades del mismo calculo (generalizacion UML)
+UC6 --|> UC3
+UC7 --|> UC3
+UC8 --|> UC3
+UC9 --|> UC3
+UC10 --|> UC3
+
+UC3 ..> UC2 : <<include>>
+UC3 ..> UC4 : <<include>>
+UC5 ..> UC3 : <<extend>>
+
+@enduml

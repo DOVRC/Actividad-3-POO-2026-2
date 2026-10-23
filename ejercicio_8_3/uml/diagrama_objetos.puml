@@ -1,0 +1,83 @@
+@startuml diagrama_objetos
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+
+object "miVentanaPrincipal:VentanaPrincipal" as vp {
+  title = "Figuras geometricas"
+}
+
+object "ventanaCilindro:VentanaCilindro" as vc {
+  campoRadio = "2"
+  campoAltura = "4"
+  volumen = "Volumen (cm3): 50,27"
+  superficie = "Superficie (cm2): 75,40"
+}
+
+object "ventanaEsfera:VentanaEsfera" as ve {
+  campoRadio = "1.5"
+}
+
+object "ventanaPiramide:VentanaPiramide" as vpi {
+  campoBase = "2"
+  campoAltura = "4"
+  campoApotema = "6"
+}
+
+object "ventanaCubo:VentanaCubo" as vcu {
+  campoLado = "3"
+}
+
+object "ventanaPrisma:VentanaPrisma" as vpr {
+  campoLargo = "2"
+  campoAncho = "3"
+  campoAltura = "4"
+}
+
+object "cilindro:Cilindro" as c {
+  radio = 2.0
+  altura = 4.0
+  volumen ≈ 50.27
+  superficie ≈ 75.40
+}
+
+object "esfera:Esfera" as e {
+  radio = 1.5
+  volumen ≈ 14.14
+  superficie ≈ 28.27
+}
+
+object "piramide:Piramide" as p {
+  base = 2.0
+  altura = 4.0
+  apotema = 6.0
+  volumen ≈ 5.33
+  superficie = 28.0
+}
+
+object "cubo:Cubo" as cu {
+  lado = 3.0
+  volumen = 27.0
+  superficie = 54.0
+}
+
+object "prisma:Prisma" as pr {
+  largo = 2.0
+  ancho = 3.0
+  altura = 4.0
+  volumen = 24.0
+  superficie = 52.0
+}
+
+vp --> vc : abre (evento)
+vp --> ve : abre (evento)
+vp --> vpi : abre (evento)
+vp --> vcu : abre (evento)
+vp --> vpr : abre (evento)
+
+vc --> c : crea al calcular
+ve --> e : crea al calcular
+vpi --> p : crea al calcular
+vcu --> cu : crea al calcular
+vpr --> pr : crea al calcular
+
+@enduml

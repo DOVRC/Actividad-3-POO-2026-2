@@ -1,0 +1,41 @@
+@startuml diagrama_objetos
+skinparam shadowing false
+
+object "miVentanaPrincipal:VentanaPrincipal" as ventana {
+  title = "Notas"
+  campoNota1 = "1"
+  campoNota2 = "2"
+  campoNota3 = "3"
+  campoNota4 = "4"
+  campoNota5 = "5"
+  promedio = "Promedio = 3.00"
+  desviacion = "Desviacion estandar = 1.41"
+  mayor = "Nota mayor = 5.0"
+  menor = "Nota menor = 1.0"
+}
+
+object "notas:Notas" as notas {
+  listaNotas = [1.0, 2.0, 3.0, 4.0, 5.0]
+}
+
+ventana --> notas : usa temporalmente\nal calcular
+
+note right of notas
+  Objeto temporal creado
+  al pulsar Calcular
+  (no es atributo permanente
+  de la ventana).
+
+  calcularPromedio() = 3.0
+  calcularDesviacion() ≈ 1.4142
+  calcularMayor() = 5.0
+  calcularMenor() = 1.0
+end note
+
+note bottom of ventana
+  Referencia: figura 8.5 del libro.
+  Principal.main es estatico;
+  no se instancia la clase Principal.
+end note
+
+@enduml

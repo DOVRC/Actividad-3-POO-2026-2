@@ -1,0 +1,203 @@
+@startuml diagrama_clases
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+left to right direction
+
+package Figuras {
+
+  class Principal {
+    + {static} main(args: String[]): void
+  }
+
+  class VentanaPrincipal {
+    - cilindro: JButton
+    - esfera: JButton
+    - piramide: JButton
+    - cubo: JButton
+    - prisma: JButton
+    + VentanaPrincipal()
+    - inicio(): void
+    + actionPerformed(evento: ActionEvent): void
+  }
+
+  class VentanaCilindro {
+    - campoRadio: JTextField
+    - campoAltura: JTextField
+    - volumen: JLabel
+    - superficie: JLabel
+    - calcular: JButton
+    + VentanaCilindro()
+    - inicio(): void
+    + actionPerformed(evento: ActionEvent): void
+    - mostrarResultados(vol: double, sup: double): void
+    - restablecerResultados(): void
+  }
+
+  class VentanaEsfera {
+    - campoRadio: JTextField
+    - volumen: JLabel
+    - superficie: JLabel
+    - calcular: JButton
+    + VentanaEsfera()
+    - inicio(): void
+    + actionPerformed(evento: ActionEvent): void
+    - mostrarResultados(vol: double, sup: double): void
+    - restablecerResultados(): void
+  }
+
+  class VentanaPiramide {
+    - campoBase: JTextField
+    - campoAltura: JTextField
+    - campoApotema: JTextField
+    - volumen: JLabel
+    - superficie: JLabel
+    - calcular: JButton
+    + VentanaPiramide()
+    - inicio(): void
+    + actionPerformed(evento: ActionEvent): void
+    - mostrarResultados(vol: double, sup: double): void
+    - restablecerResultados(): void
+  }
+
+  class VentanaCubo {
+    - campoLado: JTextField
+    - volumen: JLabel
+    - superficie: JLabel
+    - calcular: JButton
+    + VentanaCubo()
+    - inicio(): void
+    + actionPerformed(evento: ActionEvent): void
+    - mostrarResultados(vol: double, sup: double): void
+    - restablecerResultados(): void
+  }
+
+  class VentanaPrisma {
+    - campoLargo: JTextField
+    - campoAncho: JTextField
+    - campoAltura: JTextField
+    - volumen: JLabel
+    - superficie: JLabel
+    - calcular: JButton
+    + VentanaPrisma()
+    - inicio(): void
+    + actionPerformed(evento: ActionEvent): void
+    - mostrarResultados(vol: double, sup: double): void
+    - restablecerResultados(): void
+  }
+
+  class FiguraGeometrica {
+    - volumen: double
+    - superficie: double
+    + setVolumen(volumen: double): void
+    + setSuperficie(superficie: double): void
+    + getVolumen(): double
+    + getSuperficie(): double
+  }
+
+  class Cilindro {
+    - radio: double
+    - altura: double
+    + Cilindro(radio: double, altura: double)
+    + calcularVolumen(): double
+    + calcularSuperficie(): double
+  }
+
+  class Esfera {
+    - radio: double
+    + Esfera(radio: double)
+    + calcularVolumen(): double
+    + calcularSuperficie(): double
+  }
+
+  class Piramide {
+    - base: double
+    - altura: double
+    - apotema: double
+    + Piramide(base: double, altura: double, apotema: double)
+    + calcularVolumen(): double
+    + calcularSuperficie(): double
+  }
+
+  class Cubo {
+    - lado: double
+    + Cubo(lado: double)
+    + calcularVolumen(): double
+    + calcularSuperficie(): double
+  }
+
+  class Prisma {
+    - largo: double
+    - ancho: double
+    - altura: double
+    + Prisma(largo: double, ancho: double, altura: double)
+    + calcularVolumen(): double
+    + calcularSuperficie(): double
+  }
+
+  class UtilidadesEntrada <<utility>> {
+    - {static} LOCALE_ES: Locale
+    - UtilidadesEntrada()
+    ~ {static} leerDimensionPositiva(padre: Component, campo: JTextField, nombreCampo: String): Double
+    ~ {static} formatearMedida(valor: double): String
+  }
+
+  class CargadorImagen <<utility>> {
+    - {static} ANCHO: int
+    - {static} ALTO: int
+    - CargadorImagen()
+    ~ {static} crearEtiquetaFigura(nombreArchivo: String): JLabel
+    - {static} cargar(nombreArchivo: String): ImageIcon
+  }
+
+  interface ActionListener
+  class JFrame
+}
+
+Principal ..> VentanaPrincipal : crea
+VentanaPrincipal --|> JFrame
+VentanaPrincipal ..|> ActionListener
+
+VentanaCilindro --|> JFrame
+VentanaEsfera --|> JFrame
+VentanaPiramide --|> JFrame
+VentanaCubo --|> JFrame
+VentanaPrisma --|> JFrame
+
+VentanaCilindro ..|> ActionListener
+VentanaEsfera ..|> ActionListener
+VentanaPiramide ..|> ActionListener
+VentanaCubo ..|> ActionListener
+VentanaPrisma ..|> ActionListener
+
+VentanaPrincipal ..> VentanaCilindro : abre
+VentanaPrincipal ..> VentanaEsfera : abre
+VentanaPrincipal ..> VentanaPiramide : abre
+VentanaPrincipal ..> VentanaCubo : abre
+VentanaPrincipal ..> VentanaPrisma : abre
+
+VentanaCilindro ..> Cilindro : crea al calcular
+VentanaEsfera ..> Esfera : crea al calcular
+VentanaPiramide ..> Piramide : crea al calcular
+VentanaCubo ..> Cubo : crea al calcular
+VentanaPrisma ..> Prisma : crea al calcular
+
+VentanaCilindro ..> UtilidadesEntrada
+VentanaEsfera ..> UtilidadesEntrada
+VentanaPiramide ..> UtilidadesEntrada
+VentanaCubo ..> UtilidadesEntrada
+VentanaPrisma ..> UtilidadesEntrada
+
+VentanaCilindro ..> CargadorImagen
+VentanaEsfera ..> CargadorImagen
+VentanaPiramide ..> CargadorImagen
+VentanaCubo ..> CargadorImagen
+VentanaPrisma ..> CargadorImagen
+
+Cilindro --|> FiguraGeometrica
+Esfera --|> FiguraGeometrica
+Piramide --|> FiguraGeometrica
+Cubo --|> FiguraGeometrica
+Prisma --|> FiguraGeometrica
+
+@enduml
